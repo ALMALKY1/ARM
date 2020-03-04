@@ -12,7 +12,7 @@ GEN_CMDS__FLAG :=
 ORDERED_OBJS += \
 "./main.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
-"../tm4c123gh6pm.cmd" \
+"./MCAL/GPIO/Src/GPIO.obj" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
 
@@ -24,7 +24,9 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
+-include MCAL/GPIO/Src/subdir_vars.mk
 -include subdir_rules.mk
+-include MCAL/GPIO/Src/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -134,11 +136,11 @@ BIN_OUTPUTS__QUOTED += \
 
 
 # All Target
-all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
+all: $(OBJS) $(GEN_CMDS)
 	@$(MAKE) --no-print-directory -Onone "GPIO3.out"
 
 # Tool invocations
-GPIO3.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
+GPIO3.out: $(OBJS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: ARM Linker'
 	"C:/ti/ccs930/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"GPIO3.map" --heap_size=0 --stack_size=512 -i"C:/ti/ccs930/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/lib" -i"C:/ti/ccs930/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="GPIO3_linkInfo.xml" --rom_model -o "GPIO3.out" $(ORDERED_OBJS)
@@ -155,8 +157,8 @@ GPIO3.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
-	-$(RM) "main.d" "tm4c123gh6pm_startup_ccs.d" 
+	-$(RM) "main.obj" "tm4c123gh6pm_startup_ccs.obj" "MCAL\GPIO\Src\GPIO.obj" 
+	-$(RM) "main.d" "tm4c123gh6pm_startup_ccs.d" "MCAL\GPIO\Src\GPIO.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

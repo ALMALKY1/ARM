@@ -1,96 +1,95 @@
 /*
  * GPIO.c
  *
- *  Created on: Feb 6, 2020
- *      Author: Mohamed ALMALKY
+ *  Created on: 4/3/ 2020
+ *      Author:  ALMALKY
 
  */
+#include <common/BIT_op.h>
+#include <MCAL/GPIO/Inc/GPIO_CONFG.h>
+#include <MCAL/GPIO/Inc/GPIO_Hw.h>
 
-#include "GPIO_confg.h"
-#include "Bit_op.h"
 
-
-void GPIO_INIT(enum_PORT port)
+void GPIO_INIT(struct_PORT port)
 {
-    switch (port){
-    case PORTA :
-       Set_Bit(SYSCTL_RCGC2,5);   //ACTIVE CLOCK FOR PORT A
-       delay = SYSCTL_RCGC2 ;
-       (PORTA_BASE + GPIO_LOCK) = 0x4C4F434B;  //UNLOCK PORTA
-       (PORTA_BASE + GPIO_CR) = 0x1F ; //ACTIVE  COMMIT REGITERS
 
-       (PORTA_BASE+GPIO_AFSEL)=0x00000000; //DISAble alternative function
-       (PORTA_BASE+GPIO_AMSEL)= 0x00; //Disable analog on port
-       (PORTA_BASE+GPIOPCTL)=0X00000000; //SELECT FUNCTION
-       (PORTA_BASE+GPIO_PUR)=0xFFFFFFF; //ENABLE PULL UP
-       (PORTA_BASE+GPIO_DEN)=0xFFFFFFFF; //Enable digital value
+    switch (port) {
+
+    case PORT_A :
+
+        Set_Bit(SYSCTL_RCGC2,5);   //ACTIVE CLOCK FOR PORT A
+
+            GPIOLOCK_REG(0) = 0x4C4F434B;
+            GPIOCR_REG(0) = 0x1F;
+            GPIOAFSEL_REG(0)=0x00000000; //DISAble alternative function
+            GPIOAMSEL_REG(0)= 0x00; //Disable analog on port
+            GPIOPCTL_REG(0)=0X00000000; //SELECT FUNCTION
+            GPIOPUR_REG(0)=0xFFFFFFF; //ENABLE PULL UP
+            GPIODEN_REG(0)=0xFFFFFFFF; //Enable digital value
 
 
         break;
-    case PORTB :
+
+
+    case PORT_B :
             Set_Bit(SYSCTL_RCGC2,4); //ACTIVE CLOCK FOR PORT B
-            delay = SYSCTL_RCGC2 ;
-            (PORTB_BASE + GPIO_LOCK) = 0x4C4F434B;
-            (PORTB_BASE + GPIO_CR ) = 0x1F; //ACTIVE  COMMIT REGITERS
 
-            (PORTB_BASE+GPIO_AFSEL)=0x00000000; //DISAble alternative function
-            (PORTB_BASE+GPIO_AMSEL)= 0x00; //Disable analog on port
-            (PORTB_BASE+GPIOPCTL)=0X00000000; //SELECT FUNCTION
-            (PORTB_BASE+GPIO_PUR)=0xFFFFFFF; //ENABLE PULL UP
-            (PORTB_BASE+GPIO_DEN)=0xFFFFFFFF; //Enable digital value
+            GPIOLOCK_REG(1) = 0x4C4F434B;
+            GPIOCR_REG(1) = 0x1F;
 
-
+            GPIOAFSEL_REG(1)=0x00000000; //DISAble alternative function
+            GPIOAMSEL_REG(1)= 0x00; //Disable analog on port
+            GPIOPCTL_REG(1)=0X00000000; //SELECT FUNCTION
+            GPIOPUR_REG(1)=0xFFFFFFF; //ENABLE PULL UP
+            GPIODEN_REG(1)=0xFFFFFFFF; //Enable digital value
             break;
-    case PORTC :
+
+    case PORT_C :
             Set_Bit(SYSCTL_RCGC2,3); //ACTIVE CLOCK FOR PORT C
-            delay = SYSCTL_RCGC2;
-            (PORTC_BASE + GPIO_LOCK) = 0x4C4F434B;
-            (PORTC_BASE + GPIO_CR ) = 0x1F;
+            GPIOLOCK_REG(2) = 0x4C4F434B;
+            GPIOCR_REG(2) = 0x1F;
 
-            (PORTC_BASE+GPIO_AFSEL)=0x00000000; //DISAble alternative function
-            (PORTC_BASE+GPIO_AMSEL)= 0x00; //Disable analog on port
-            (PORTC_BASE+GPIOPCTL)=0X00000000; //SELECT FUNCTION
-            (PORTC_BASE+GPIO_PUR)=0xFFFFFFF; //ENABLE PULL UP
-            (PORTC_BASE+GPIO_DEN)=0xFFFFFFFF; //Enable digital value
+            GPIOAFSEL_REG(2)=0x00000000; //DISAble alternative function
+            GPIOAMSEL_REG(2)= 0x00; //Disable analog on port
+            GPIOPCTL_REG(2)=0X00000000; //SELECT FUNCTION
+            GPIOPUR_REG(2)=0xFFFFFFF; //ENABLE PULL UP
+            GPIODEN_REG(2)=0xFFFFFFFF; //Enable digital value
 
             break;
-    case PORTD :
+    case PORT_D :
             Set_Bit(SYSCTL_RCGC2,2);
-            delay = SYSCTL_RCGC2 ;
-            (PORTD_BASE + GPIO_LOCK) = 0x4C4F434B;
-            (PORTD_BASE + GPIO_CR ) = 0x1F ;
-
-            (PORTD_BASE+GPIO_AFSEL)=0x00000000; //DISAble alternative function
-            (PORTD_BASE+GPIO_AMSEL)= 0x00; //Disable analog on port
-            (PORTD_BASE+GPIOPCTL)=0X00000000; //SELECT FUNCTION
-            (PORTD_BASE+GPIO_PUR)=0xFFFFFFF; //ENABLE PULL UP
-            (PORTD_BASE+GPIO_DEN)=0xFFFFFFFF; //Enable digital value
+            GPIOLOCK_REG(3) = 0x4C4F434B;
+            GPIOCR_REG(3) = 0x1F;
+            GPIOAFSEL_REG(3)=0x00000000; //DISAble alternative function
+            GPIOAMSEL_REG(3)= 0x00; //Disable analog on port
+            GPIOPCTL_REG(3)=0X00000000; //SELECT FUNCTION
+            GPIOPUR_REG(3)=0xFFFFFFF; //ENABLE PULL UP
+            GPIODEN_REG(3)=0xFFFFFFFF; //Enable digital value
 
             break;
-    case PORTE :
+    case PORT_E :
             Set_Bit(SYSCTL_RCGC2,1);
-            delay = SYSCTL_RCGC2 ;
-            (PORTE_BASE + GPIO_LOCK) = 0x4C4F434B;
-            (PORTE_BASE + GPIO_CR ) = 0x1F ;
+            GPIOLOCK_REG(4) = 0x4C4F434B;
+            GPIOCR_REG(4) = 0x1F;
+            GPIOAFSEL_REG(4)=0x00000000; //DISAble alternative function
+            GPIOAMSEL_REG(4)= 0x00; //Disable analog on port
+            GPIOPCTL_REG(4)=0X00000000; //SELECT FUNCTION
+            GPIOPUR_REG(4)=0xFFFFFFF; //ENABLE PULL UP
+            GPIODEN_REG(4)=0xFFFFFFFF; //Enable digital value
 
-            (PORTE_BASE+GPIO_AFSEL)=0x00000000; //DISAble alternative function
-            (PORTE_BASE+GPIO_AMSEL)= 0x00; //Disable analog on port
-            (PORTE_BASE+GPIOPCTL)=0X00000000; //SELECT FUNCTION
-            (PORTE_BASE+GPIO_PUR)=0xFFFFFFF; //ENABLE PULL UP
-            (PORTE_BASE+GPIO_DEN)=0xFFFFFFFF; //Enable digital value
             break;
-    case PORTF :
+
+    case PORT_F :
             Set_Bit(SYSCTL_RCGC2,0);
-            delay = SYSCTL_RCGC2 ;
-           (PORTE_BASF + GPIO_LOCK) = 0x4C4F434B;
-           (PORTE_BASE + GPIO_CR ) = 0x1F;
+            GPIOLOCK_REG(5) = 0x4C4F434B;
+            GPIOCR_REG(5) = 0x1F;
+            GPIOAFSEL_REG(5)=0x00000000; //DISAble alternative function
+            GPIOAMSEL_REG(5)= 0x00; //Disable analog on port
+            GPIOPCTL_REG(5)=0X00000000; //SELECT FUNCTION
+            GPIOPUR_REG(5)=0xFFFFFFF; //ENABLE PULL UP
+            GPIODEN_REG(5)=0xFFFFFFFF; //Enable digital value
 
-           (PORTE_BASE+GPIO_AFSEL)=0x00000000; //DISAble alternative function
-           (PORTE_BASE+GPIO_AMSEL)= 0x00; //Disable analog on port
-           (PORTE_BASE+GPIOPCTL)=0X00000000; //SELECT FUNCTION
-           (PORTE_BASE+GPIO_PUR)=0xFFFFFFF; //ENABLE PULL UP
-           (PORTE_BASE+GPIO_DEN)=0xFFFFFFFF; //Enable digital value
-            break;
+            break ;
     }
 
 
@@ -99,301 +98,318 @@ void GPIO_INIT(enum_PORT port)
 
 
 }
-void Set_Pin_Direction (enum_PORT port  , uint8_t pin , enum_direction Direction)
+void Set_Pin_Direction (struct_PORT port  , uint8_t pin , enum_direction Direction)
 {
    switch(port)
    {
-   case PORTA :
-       if(Direction == GPIO_OUTPUT)
+   case PORT_A :
+           if(Direction == GPIO_OUTPUT)
+           {
+               Set_Bit((GPIO_DIR_REG(0)),pin);
+           }
+       else if (Direction == GPIO_INPUT)
+           {
+               Clear_Bit((GPIO_DIR_REG(0)),pin);
+           }
+       break;
+
+   case PORT_B :
+           if(Direction == GPIO_OUTPUT)
+           {
+               Set_Bit((GPIO_DIR_REG(1)),pin);
+           }
+       else if (Direction == GPIO_INPUT)
+           {
+               Clear_Bit((GPIO_DIR_REG(1)),pin);
+           }
+       break;
+
+   case PORT_C :
+           if(Direction == GPIO_OUTPUT)
+           {
+               Set_Bit((GPIO_DIR_REG(2)),pin);
+           }
+       else if (Direction == GPIO_INPUT)
+           {
+               Clear_Bit((GPIO_DIR_REG(2)),pin);
+           }
+       break;
+
+   case PORT_D :
+           if(Direction == GPIO_OUTPUT)
+           {
+               Set_Bit((GPIO_DIR_REG(3)),pin);
+           }
+       else if (Direction == GPIO_INPUT)
+           {
+               Clear_Bit((GPIO_DIR_REG(3)),pin);
+           }
+       break;
+
+   case PORT_E :
+          if(Direction == GPIO_OUTPUT)
+           {
+        Set_Bit((GPIO_DIR_REG(4)),pin);
+           }
+      else if (Direction == GPIO_INPUT)
+           {
+           Clear_Bit((GPIO_DIR_REG(4)),pin);
+           }
+       break;
+
+   case PORT_F :
+         if(Direction == GPIO_OUTPUT)
        {
-           Set_Bit((PORTA_BASE+GPIO_DIR),pin);
+        Set_Bit((GPIO_DIR_REG(5)),pin);
        }
-       else (Direction ==GPIO_INPUT)
+       else if (Direction == GPIO_INPUT)
         {
-           Clear_Bit(PORTA_BASE=GPIO_DIR,pin);
+           Clear_Bit((GPIO_DIR_REG(5)),pin);
         }
        break;
 
-   case PORTB :
-          if(Direction == GPIO_OUTPUT)
-          {
-              Set_Bit((PORTB_BASE+GPIO_DIR),pin);
-          }
-          else (Direction ==GPIO_INPUT)
-           {
-              Clear_Bit(PORTB_BASE=GPIO_DIR,pin);
-           }
-          break;
-   case PORTC :
-            if(Direction == GPIO_OUTPUT)
-            {
-                Set_Bit((PORTC_BASE+GPIO_DIR),pin);
-            }
-            else (Direction ==GPIO_INPUT)
-             {
-                Clear_Bit(PORTC_BASE=GPIO_DIR,pin);
-             }
-            break;
-   case PORTD :
-            if(Direction == GPIO_OUTPUT)
-            {
-                Set_Bit((PORTD_BASE+GPIO_DIR),pin);
-            }
-            else (Direction ==GPIO_INPUT)
-             {
-                Clear_Bit(PORTD_BASE=GPIO_DIR,pin);
-             }
-            break;
-   case PORTE :
-            if(Direction == GPIO_OUTPUT)
-            {
-                Set_Bit((PORTE_BASE+GPIO_DIR),pin);
-            }
-            else (Direction ==GPIO_INPUT)
-             {
-                Clear_Bit(PORTE_BASE=GPIO_DIR,pin);
-             }
-            break;
-
-   case PORTF :
-            if(Direction == GPIO_OUTPUT)
-            {
-                Set_Bit((PORTF_BASE+GPIO_DIR),pin);
-            }
-            else (Direction ==GPIO_INPUT)
-             {
-                Clear_Bit(PORTF_BASE=GPIO_DIR,pin);
-             }
-            break;
 
    }
 }
 
-void Set_PORT_Direction (enum_PORT port  , enum_direction Direction)
+void Set_PORT_Direction (struct_PORT port  , enum_direction Direction)
 {
     switch(port)
     {
 
-    case PORTA :
+    case PORT_A :
         if(Direction == GPIO_INPUT)
         {
-            (PORTA_BASE+GPIO_DIR)=0X00000000;
+           (GPIO_DIR_REG(0))=0X00000000;
         }
 
-        else(Direction==GPIO_OUTPUT)
+        else if (Direction==GPIO_OUTPUT)
         {
-            (PORTA_BASE+GPIO_DIR)=0XFFFFFFFF;
+            (GPIO_DIR_REG(0))=0XFFFFFFFF;
         }
         break;
 
-    case PORTB :
+    case PORT_B :
+        if(Direction == GPIO_INPUT)
+            {
+               (GPIO_DIR_REG(1))=0X00000000;
+            }
+
+            else if (Direction==GPIO_OUTPUT)
+            {
+                (GPIO_DIR_REG(1))=0XFFFFFFFF;
+            }
+            break;
+
+    case PORT_C :
+        if(Direction == GPIO_INPUT)
+            {
+               (GPIO_DIR_REG(2))=0X00000000;
+            }
+
+            else if (Direction==GPIO_OUTPUT)
+            {
+                (GPIO_DIR_REG(2))=0XFFFFFFFF;
+            }
+            break;
+    case PORT_D:
+        if(Direction == GPIO_INPUT)
+            {
+               (GPIO_DIR_REG(3))=0X00000000;
+            }
+
+            else if (Direction==GPIO_OUTPUT)
+            {
+                (GPIO_DIR_REG(3))=0XFFFFFFFF;
+            }
+            break;
+    case PORT_E:
+        if(Direction == GPIO_INPUT)
+            {
+               (GPIO_DIR_REG(4))=0X00000000;
+            }
+
+            else if (Direction==GPIO_OUTPUT)
+            {
+                (GPIO_DIR_REG(4))=0XFFFFFFFF;
+            }
+            break;
+
+    case PORT_F :
             if(Direction == GPIO_INPUT)
             {
-                (PORTB_BASE+GPIO_DIR)=0X00000000;
+               (GPIO_DIR_REG(5))=0X00000000;
             }
 
-            else(Direction==GPIO_OUTPUT)
+            else if (Direction==GPIO_OUTPUT)
             {
-                (PORTB_BASE+GPIO_DIR)=0XFFFFFFFF;
+                (GPIO_DIR_REG(5))=0XFFFFFFFF;
             }
             break;
-
-    case PORTC :
-                if(Direction == GPIO_INPUT)
-                {
-                    (PORTC_BASE+GPIO_DIR)=0X00000000;
-                }
-
-                else(Direction==GPIO_OUTPUT)
-                {
-                    (PORTC_BASE+GPIO_DIR)=0XFFFFFFFF;
-                }
-                break;
-    case PORTD:
-                if(Direction == GPIO_INPUT)
-                {
-                    (PORTD_BASE+GPIO_DIR)=0X00000000;
-                }
-
-                else(Direction==GPIO_OUTPUT)
-                {
-                    (PORTD_BASE+GPIO_DIR)=0XFFFFFFFF;
-                }
-                break;
-    case PORTE:
-                if(Direction == GPIO_INPUT)
-                {
-                    (PORTE_BASE+GPIO_DIR)=0X00000000;
-                }
-
-                else(Direction==GPIO_OUTPUT)
-                {
-                    (PORTE_BASE+GPIO_DIR)=0XFFFFFFFF;
-                }
-                break;
-
-    case PORTF :
-                if(Direction == GPIO_INPUT)
-                {
-                    (PORTF_BASE+GPIO_DIR)=0X00000000;
-                }
-
-                else(Direction==GPIO_OUTPUT)
-                {
-                    (PORTF_BASE+GPIO_DIR)=0XFFFFFFFF;
-                }
-                break;
     }
 }
 
-void write_pin(enum_PORT port , uint8_t pin , enum_pin_value value )
+
+void write_pin(struct_PORT port , uint8_t MASK , enum_pin_value value)
 {
+
     switch(port)
     {
-    case PORTA :
+
+    case PORT_A :
         if (value == GPIO_HIGH)
         {
-            Set_Bit((PORTA_BASE+GPIO_DATA),pin);
+            GPIODATA_WRITE(GPIO_HIGH,MASK,0);
         }
-        else (value == GPIO_LOW)
+        else if (value == GPIO_LOW)
         {
-            Clear_Bit((PORTA_BASE+GPIO_DATA),pin);
+            GPIODATA_WRITE(GPIO_LOW,MASK,0);
         }
         break;
 
-    case PORTB :
+    case PORT_B :
+
            if (value == GPIO_HIGH)
            {
-               Set_Bit((PORTB_BASE+GPIO_DATA),pin);
+               GPIODATA_WRITE(GPIO_HIGH,MASK,1);
            }
-           else (value == GPIO_LOW)
+           else if (value == GPIO_LOW)
            {
-               Clear_Bit((PORTB_BASE+GPIO_DATA),pin);
+               GPIODATA_WRITE(GPIO_LOW,MASK,1);
            }
            break;
 
-    case PORTC :
+    case PORT_C :
+
            if (value == GPIO_HIGH)
            {
-               Set_Bit((PORTC_BASE+GPIO_DATA),pin);
+               GPIODATA_WRITE(GPIO_HIGH,MASK,2);
            }
-           else (value == GPIO_LOW)
+           else if (value == GPIO_LOW)
            {
-               Clear_Bit((PORTC_BASE+GPIO_DATA),pin);
+               GPIODATA_WRITE(GPIO_LOW,MASK,2);
            }
            break;
-    case PORTD :
-           if (value == GPIO_HIGH)
-           {
-               Set_Bit((PORTD_BASE+GPIO_DATA),pin);
-           }
-           else (value == GPIO_LOW)
-           {
-               Clear_Bit((PORTD_BASE+GPIO_DATA),pin);
-           }
-           break;
-    case PORTE :
-           if (value == GPIO_HIGH)
-           {
-               Set_Bit((PORTE_BASE+GPIO_DATA),pin);
-           }
-           else (value == GPIO_LOW)
-           {
-               Clear_Bit((PORTE_BASE+GPIO_DATA),pin);
-           }
-           break;
-    case PORTF :
-           if (value == GPIO_HIGH)
-           {
-               Set_Bit((PORTF_BASE+GPIO_DATA),pin);
-           }
-           else (value == GPIO_LOW)
-           {
-               Clear_Bit((PORTF_BASE+GPIO_DATA),pin);
-           }
-           break;
+
+    case PORT_D :
+
+        if (value == GPIO_HIGH)
+             {
+                 GPIODATA_WRITE(GPIO_HIGH,MASK,3);
+             }
+             else if (value == GPIO_LOW)
+             {
+                 GPIODATA_WRITE(GPIO_LOW,MASK,3);
+             }
+             break;
+
+    case PORT_E :
+
+        if (value == GPIO_HIGH)
+             {
+                 GPIODATA_WRITE(GPIO_HIGH,MASK,4);
+             }
+             else if (value == GPIO_LOW)
+             {
+                 GPIODATA_WRITE(GPIO_LOW,MASK,4);
+             }
+             break;
+
+    case PORT_F :
+        if (value == GPIO_HIGH)
+             {
+                 GPIODATA_WRITE(GPIO_HIGH,MASK,5);
+             }
+             else if (value == GPIO_LOW)
+             {
+                 GPIODATA_WRITE(GPIO_LOW,MASK,5);
+             }
+             break;
     }
 
 }
 
 
-void Write_Port(enum_PORT port , uint8_t value )
+void Write_Port(struct_PORT port , uint8_t value ,uint8_t MASK)
 {
     switch(port)
     {
-    case PORTA :
-        (PORTA_BASE+GPIO_DATA)= value;
+    case PORT_A :
+        GPIODATA_WRITE(value,MASK,0);
         break;
-    case PORTB :
-            (PORTB_BASE+GPIO_DATA)= value;
+
+    case PORT_B :
+        GPIODATA_WRITE(value,MASK,1);
+
+        break;
+
+    case PORT_C :
+        GPIODATA_WRITE(value,MASK,2);
             break;
-    case PORTC :
-            (PORTC_BASE+GPIO_DATA)= value;
+    case PORT_D :
+        GPIODATA_WRITE(value,MASK,3);
             break;
-    case PORTD :
-            (PORTD_BASE+GPIO_DATA)= value;
+    case PORT_E :
+        GPIODATA_WRITE(value,MASK,4);
             break;
-    case PORTE :
-            (PORTE_BASE+GPIO_DATA)= value;
-            break;
-    case PORTF :
-            (PORTF_BASE+GPIO_DATA)= value;
+    case PORT_F :
+        GPIODATA_WRITE(value,MASK,5);
             break;
     }
 }
 
-uint8_t Read_pin(enum_PORT port , uint8_t pin )
+uint8_t Read_pin(struct_PORT port , uint8_t MASK)
 {
-    uint8_t result = 0  ;
-
+    uint8_t  result = 0 ;
     switch (port)
     {
-    case PORTA :
-                result = Get_Bit(PORTA_BASE+GPIO_DATA,pin) ;
+    case PORT_A :
+
+                result = GPIO_DATA_READ(MASK,0);
                 break;
-    case PORTB :
-                result = Get_Bit(PORTB_BASE+GPIO_DATA,pin) ;
+    case PORT_B :
+                result = GPIO_DATA_READ(MASK,1);
                 break;
-    case PORTC :
-                result = Get_Bit(PORTC_BASE+GPIO_DATA,pin) ;
+    case PORT_C :
+                result = GPIO_DATA_READ(MASK,2);
                 break;
-    case PORTD :
-                result = Get_Bit(PORTD_BASE+GPIO_DATA,pin) ;
+    case PORT_D :
+                result = GPIO_DATA_READ(MASK,3);
                 break;
-    case PORTE :
-                result = Get_Bit(PORTE_BASE+GPIO_DATA,pin) ;
+    case PORT_E :
+                result = GPIO_DATA_READ(MASK,4);
                 break;
-    case PORTF :
-                result = Get_Bit(PORTF_BASE+GPIO_DATA,pin) ;
+    case PORT_F :
+                result = GPIO_DATA_READ(MASK,5);
                 break;
     }
     return result ;
 }
 
 
-uint8_t Read_PORT(enum_PORT port)
+uint8_t Read_PORT(struct_PORT port)
 {
     uint32_t result ;
 
    switch(port)
    {
-   case PORTA :
-       result = (PORTA_BASE+GPIO_DATA);
+   case PORT_A :
+       result = GPIO_DATA_READ(0xffff,0);
        break;
-   case PORTB :
-         result = (PORTB_BASE+GPIO_DATA);
+   case PORT_B :
+       result = GPIO_DATA_READ(0xffff,1);
          break;
-   case PORTC :
-         result = (PORTC_BASE+GPIO_DATA);
+   case PORT_C :
+       result = GPIO_DATA_READ(0xffff,2);
          break;
-   case PORTD :
-         result = (PORTD_BASE+GPIO_DATA);
+   case PORT_D :
+       result = GPIO_DATA_READ(0xffff,3);
          break;
-   case PORTE :
-         result = (PORTE_BASE+GPIO_DATA);
+   case PORT_E :
+       result = GPIO_DATA_READ(0xffff,4);
          break;
-   case PORTF :
-         result = (PORTF_BASE+GPIO_DATA);
+   case PORT_F :
+       result = GPIO_DATA_READ(0xffff,5);
          break;
    }
    return result ;
