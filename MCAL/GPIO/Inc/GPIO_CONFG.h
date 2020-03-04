@@ -34,7 +34,9 @@ void GPIO_INIT(struct_PORT port);
 
 void Set_Pin_Direction (struct_PORT port  , uint8_t pin , enum_direction Direction) ;
 void Set_PORT_Direction(struct_PORT port ,enum_direction direction );
-uint8_t Read_pin(struct_PORT port , uint8_t MASK);
+
+uint8_t Read_pin(struct_PORT port,uint8_t MASK);
+uint8_t Read_PORT(struct_PORT port);
 
 void Write_Port(struct_PORT port , uint8_t value ,uint8_t MASK);
 void write_pin(struct_PORT port , uint8_t MASK , enum_pin_value value);
