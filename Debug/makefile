@@ -12,6 +12,7 @@ GEN_CMDS__FLAG :=
 ORDERED_OBJS += \
 "./main.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
+"./MCAL/Clock/src/Clock.obj" \
 "./MCAL/GPIO/Src/GPIO.obj" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
@@ -24,8 +25,10 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
+-include MCAL/Clock/src/subdir_vars.mk
 -include MCAL/GPIO/Src/subdir_vars.mk
 -include subdir_rules.mk
+-include MCAL/Clock/src/subdir_rules.mk
 -include MCAL/GPIO/Src/subdir_rules.mk
 -include objects.mk
 
@@ -157,8 +160,8 @@ GPIO3.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" "tm4c123gh6pm_startup_ccs.obj" "MCAL\GPIO\Src\GPIO.obj" 
-	-$(RM) "main.d" "tm4c123gh6pm_startup_ccs.d" "MCAL\GPIO\Src\GPIO.d" 
+	-$(RM) "main.obj" "tm4c123gh6pm_startup_ccs.obj" "MCAL\Clock\src\Clock.obj" "MCAL\GPIO\Src\GPIO.obj" 
+	-$(RM) "main.d" "tm4c123gh6pm_startup_ccs.d" "MCAL\Clock\src\Clock.d" "MCAL\GPIO\Src\GPIO.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
