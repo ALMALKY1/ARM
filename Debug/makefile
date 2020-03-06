@@ -14,6 +14,7 @@ ORDERED_OBJS += \
 "./tm4c123gh6pm_startup_ccs.obj" \
 "./MCAL/Clock/src/Clock.obj" \
 "./MCAL/GPIO/Src/GPIO.obj" \
+"./MCAL/TIMER_32/src/TIMER.obj" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
 
@@ -27,9 +28,11 @@ RMDIR := RMDIR /S/Q
 -include subdir_vars.mk
 -include MCAL/Clock/src/subdir_vars.mk
 -include MCAL/GPIO/Src/subdir_vars.mk
+-include MCAL/TIMER_32/src/subdir_vars.mk
 -include subdir_rules.mk
 -include MCAL/Clock/src/subdir_rules.mk
 -include MCAL/GPIO/Src/subdir_rules.mk
+-include MCAL/TIMER_32/src/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -160,8 +163,8 @@ GPIO3.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" "tm4c123gh6pm_startup_ccs.obj" "MCAL\Clock\src\Clock.obj" "MCAL\GPIO\Src\GPIO.obj" 
-	-$(RM) "main.d" "tm4c123gh6pm_startup_ccs.d" "MCAL\Clock\src\Clock.d" "MCAL\GPIO\Src\GPIO.d" 
+	-$(RM) "main.obj" "tm4c123gh6pm_startup_ccs.obj" "MCAL\Clock\src\Clock.obj" "MCAL\GPIO\Src\GPIO.obj" "MCAL\TIMER_32\src\TIMER.obj" 
+	-$(RM) "main.d" "tm4c123gh6pm_startup_ccs.d" "MCAL\Clock\src\Clock.d" "MCAL\GPIO\Src\GPIO.d" "MCAL\TIMER_32\src\TIMER.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

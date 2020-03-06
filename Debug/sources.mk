@@ -114,4 +114,5 @@ SUBDIRS := \
 . \
 MCAL/Clock/src \
 MCAL/GPIO/Src \
+MCAL/TIMER_32/src \
 
